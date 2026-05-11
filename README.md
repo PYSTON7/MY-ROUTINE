@@ -32,3 +32,28 @@ A prototype is a shared object that allows all instances created from a construc
 1. Clone the repository:
 bash
 git clone https://github.com/PYSTON7/MY-ROUTINE.git
+
+## TEST DRIVEN DEVELOPMENT (PSEUDO-CODED TESTS)
+# Routine Constructor
+It should create a routine object with:
+activity (string)
+timeOfDay (string)
+completed (false by default)
+id (unique number)
+It should be able to mark a routine as complete:
+markComplete() sets completed to true
+# RoutineManager
+It should store all routines in an array
+It should add a routine to the array
+It should remove a routine using its id
+It should mark a routine as complete using its id
+It should return routines based on time of day:
+morning
+afternoon
+evening
+# UI (Basic Behavior)
+It should add a routine when the form is submitted
+It should display routines in the correct section
+It should move completed routines to a completed list
+It should delete routines when the delete button is clicked
+It should update the UI after every change
