@@ -1,40 +1,39 @@
-function RoutineManager() {
-  this.routines = [];
-}
+manager.routines.forEach(function (routine) {
 
-// Add a routine
-RoutineManager.prototype.addRoutine = function (routine) {
-  this.routines.push(routine);
-};
-
-// Remove a routine by ID
-RoutineManager.prototype.removeRoutine = function (id) {
-  this.routines = this.routines.filter(function (routine) {
-    return routine.id !== id;
-  });
-};
-
-// Get routines by time of day
-RoutineManager.prototype.getByTime = function (timeOfDay) {
-  return this.routines.filter(function (routine) {
-    return routine.timeOfDay === timeOfDay;
-  });
-};
-
-// Mark a routine as complete by ID
-RoutineManager.prototype.markComplete = function (id) {
-  const routine = this.routines.find(function (r) {
-    return r.id === id;
-  });
-
-  if (routine) {
-    routine.markComplete();
+  if (routine.completed) {
+    const li = document.createElement("li");
+    li.textContent = routine.activity + " (Completed)";
+    completedList.appendChild(li);
+    return;
   }
-};
 
-// Get all completed routines
-RoutineManager.prototype.getCompleted = function () {
-  return this.routines.filter(function (routine) {
-    return routine.completed;
+  const li = document.createElement("li");
+  li.textContent = routine.activity;
+
+  const completeBtn = document.createElement("button");
+  completeBtn.textContent = "Done";
+
+  completeBtn.addEventListener("click", function () {
+    manager.markComplete(routine.id);
+    renderRoutines();
   });
-};
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+
+  deleteBtn.addEventListener("click", function () {
+    manager.removeRoutine(routine.id);
+    renderRoutines();
+  });
+
+  li.appendChild(completeBtn);
+  li.appendChild(deleteBtn);
+
+  if (routine.timeOfDay === "morning") {
+    morningList.appendChild(li);
+  } else if (routine.timeOfDay === "afternoon") {
+    afternoonList.appendChild(li);
+  } else {
+    eveningList.appendChild(li);
+  }
+});
