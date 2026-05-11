@@ -10,3 +10,10 @@ My Routine Planner is a simple JavaScript application that helps users organize 
 - Mark activities as completed
 - Delete activities
 - View completed tasks separately
+# Technologies Used
+- HTML
+- CSS
+- JavaScript
+- Constructors & Prototypes
+- DOM Manipulation
+- Test-Driven Development
