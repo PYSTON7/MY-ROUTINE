@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Routine</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h1>My Routine Planner</h1>
+
+    <!--ADD ROUTINE FORM -->
+    <form id="routine-form">
+
+      <div class="form-group">
+        <label for="activity">Activity</label>
+        <input
+          type="text"
+          id="activity"
+          placeholder="e.g. Go for a walk"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="time-of-day">Time of Day</label>
+        <select id="time-of-day" required>
+          <option value="morning">Morning</option>
+          <option value="afternoon">Afternoon</option>
+          <option value="evening">Evening</option>
+        </select>
+      </div>
+
+      <button type="submit">Add Activity</button>
+
+    </form>
+
+    <!-- ROUTINES SECTIONS -->
+
+    <div class="routine-sections">
+
+      <!-- MORNING -->
+      <div class="routine-box">
+        <h2>Morning</h2>
+        <ul id="morning-list"></ul>
+      </div>
+
+      <!-- AFTERNOON -->
+      <div class="routine-box">
+        <h2>Afternoon</h2>
+        <ul id="afternoon-list"></ul>
+      </div>
+
+      <!-- EVENING -->
+      <div class="routine-box">
+        <h2>Evening</h2>
+        <ul id="evening-list"></ul>
+      </div>
+
+    </div>
+
+    <!--COMPLETED -->
+    <div class="completed-section">
+      <h2>Completed Activities</h2>
+      <ul id="completed-list"></ul>
+    </div>
+
+  </div>
+
+  <!--JS FILES -->
+  <script src="js/routine.js"></script>
+  <script src="js/routine-manager.js"></script>
+  <script src="js/scripts.js"></script>
+
+</body>
+</html>
