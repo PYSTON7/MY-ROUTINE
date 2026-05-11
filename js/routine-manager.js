@@ -1,39 +1,16 @@
-manager.routines.forEach(function (routine) {
+function RoutineManager() {
+  this.routines = [];
+}
 
-  if (routine.completed) {
-    const li = document.createElement("li");
-    li.textContent = routine.activity + " (Completed)";
-    completedList.appendChild(li);
-    return;
-  }
+RoutineManager.prototype.addRoutine = function (routine) {
+  this.routines.push(routine);
+};
 
-  const li = document.createElement("li");
-  li.textContent = routine.activity;
+RoutineManager.prototype.removeRoutine = function (id) {
+  this.routines = this.routines.filter(r => r.id !== id);
+};
 
-  const completeBtn = document.createElement("button");
-  completeBtn.textContent = "Done";
-
-  completeBtn.addEventListener("click", function () {
-    manager.markComplete(routine.id);
-    renderRoutines();
-  });
-
-  const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "Delete";
-
-  deleteBtn.addEventListener("click", function () {
-    manager.removeRoutine(routine.id);
-    renderRoutines();
-  });
-
-  li.appendChild(completeBtn);
-  li.appendChild(deleteBtn);
-
-  if (routine.timeOfDay === "morning") {
-    morningList.appendChild(li);
-  } else if (routine.timeOfDay === "afternoon") {
-    afternoonList.appendChild(li);
-  } else {
-    eveningList.appendChild(li);
-  }
-});
+RoutineManager.prototype.markComplete = function (id) {
+  const routine = this.routines.find(r => r.id === id);
+  if (routine) routine.markComplete();
+};

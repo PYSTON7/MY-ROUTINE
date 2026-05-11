@@ -1,7 +1,5 @@
-// Create manager instance
 const manager = new RoutineManager();
 
-// DOM ELEMENTS
 const form = document.getElementById("routine-form");
 const activityInput = document.getElementById("activity");
 const timeInput = document.getElementById("time-of-day");
@@ -9,67 +7,61 @@ const timeInput = document.getElementById("time-of-day");
 const morningList = document.getElementById("morning-list");
 const afternoonList = document.getElementById("afternoon-list");
 const eveningList = document.getElementById("evening-list");
+const completedList = document.getElementById("completed-list");
 
-// FORM SUBMIT
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const activity = activityInput.value;
+  const activity = activityInput.value.trim();
   const timeOfDay = timeInput.value;
 
-  // Create new routine object
   const routine = new Routine(activity, timeOfDay);
 
-  // Add to manager
   manager.addRoutine(routine);
 
-  // Clear form
   form.reset();
 
-  // Re-render UI
-  renderRoutines();
+  render();
 });
 
-// RENDER FUNCTION
-function renderRoutines() {
-  // Clear all lists
+function render() {
   morningList.innerHTML = "";
   afternoonList.innerHTML = "";
   eveningList.innerHTML = "";
+  completedList.innerHTML = "";
 
-  // Loop through routines
-  manager.routines.forEach(function (routine) {
-    const li = document.createElement("li");
+  manager.routines.forEach(routine => {
 
-    li.textContent = routine.activity;
-
-    // Style if completed
+    // COMPLETED
     if (routine.completed) {
-      li.style.textDecoration = "line-through";
+      const li = document.createElement("li");
+      li.textContent = routine.activity + " (Done)";
+      completedList.appendChild(li);
+      return;
     }
 
-    // COMPLETE BUTTON
-    const completeBtn = document.createElement("button");
-    completeBtn.textContent = "Done";
+    const li = document.createElement("li");
+    li.textContent = routine.activity;
 
-    completeBtn.addEventListener("click", function () {
+    // DONE BUTTON
+    const doneBtn = document.createElement("button");
+    doneBtn.textContent = "Done";
+    doneBtn.addEventListener("click", () => {
       manager.markComplete(routine.id);
-      renderRoutines();
+      render();
     });
 
     // DELETE BUTTON
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
-
-    deleteBtn.addEventListener("click", function () {
+    deleteBtn.addEventListener("click", () => {
       manager.removeRoutine(routine.id);
-      renderRoutines();
+      render();
     });
 
-    li.appendChild(completeBtn);
+    li.appendChild(doneBtn);
     li.appendChild(deleteBtn);
 
-    // Place into correct section
     if (routine.timeOfDay === "morning") {
       morningList.appendChild(li);
     } else if (routine.timeOfDay === "afternoon") {

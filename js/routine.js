@@ -1,16 +1,14 @@
 function Routine(activity, timeOfDay) {
   this.activity = activity;
-  this.timeOfDay = timeOfDay; // morning, afternoon, evening
+  this.timeOfDay = timeOfDay;
   this.completed = false;
-  this.id = Date.now(); // simple unique ID
+  this.id = Date.now();
 }
 
-// Mark a routine as complete
 Routine.prototype.markComplete = function () {
   this.completed = true;
 };
 
-// Return 
 Routine.prototype.getInfo = function () {
   return `${this.activity} (${this.timeOfDay})`;
 };
