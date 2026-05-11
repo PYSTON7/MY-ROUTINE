@@ -1,0 +1,27 @@
+{
+  "name": "routine",
+  "version": "1.0.0",
+  "description": "Routine Planner is a web application that helps users organize morning, afternoon, and evening activities using JavaScript constructors and prototypes.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PYSTON7/MY-ROUTINE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/PYSTON7/MY-ROUTINE/issues"
+  },
+  "homepage": "https://github.com/PYSTON7/MY-ROUTINE#readme",
+  "devDependencies": {
+    "jest": "^30.4.2"
+  }
+}
