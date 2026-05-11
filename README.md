@@ -17,3 +17,15 @@ My Routine Planner is a simple JavaScript application that helps users organize 
 - Constructors & Prototypes
 - DOM Manipulation
 - Test-Driven Development
+## Warm-Up Questions
+
+# 1. Difference between object literal and constructor
+Object literal creates a single object directly, while a constructor allows you to create multiple objects with the same structure using the `new` keyword.
+
+# 2. Benefits of constructors
+- Reusability
+- Cleaner code for multiple objects
+- Easier scaling of applications
+
+# 3. What is a prototype?
+A prototype is a shared object that allows all instances created from a constructor to share methods, instead of duplicating them in memory.
