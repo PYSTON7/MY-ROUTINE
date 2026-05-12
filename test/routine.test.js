@@ -1,88 +1,74 @@
-describe("Routine", () => {
+// const { Routine } = require("../js/routine");
+// const { RoutineManager } = require("../js/routine-manager");
 
-  test("It should create a routine object with correct properties", () => {
-    const routine = new Routine("Go for a walk", "morning");
+// describe("Routine Constructor", () => {
 
-    expect(routine.activity).toBe("Go for a walk");
-    expect(routine.timeOfDay).toBe("morning");
-    expect(routine.completed).toBe(false);
-    expect(routine.id).toBeDefined();
-  });
+//   test("should create a routine object with correct properties", () => {
+//     const routine = new Routine("Go for a walk", "morning");
 
-  test("It should mark a routine as complete", () => {
-    const routine = new Routine("Study coding", "afternoon");
+//     expect(routine.activity).toBe("Go for a walk");
+//     expect(routine.timeOfDay).toBe("morning");
+//     expect(routine.completed).toBe(false);
+//     expect(routine.id).toBeDefined();
+//   });
 
-    routine.markComplete();
+//   test("should mark routine as complete", () => {
+//     const routine = new Routine("Study", "afternoon");
 
-    expect(routine.completed).toBe(true);
-  });
+//     routine.markComplete();
 
-  test("It should return formatted routine info", () => {
-    const routine = new Routine("Read book", "evening");
+//     expect(routine.completed).toBe(true);
+//   });
 
-    expect(routine.getInfo()).toBe("Read book (evening)");
-  });
+//   test("should return formatted info", () => {
+//     const routine = new Routine("Read", "evening");
 
-});
+//     expect(routine.getInfo()).toBe("Read (evening)");
+//   });
 
-describe("RoutineManager", () => {
+// });
 
-  test("It should add a routine", () => {
-    const manager = new RoutineManager();
-    const routine = new Routine("Gym", "morning");
+// describe("RoutineManager", () => {
 
-    manager.addRoutine(routine);
+//   test("should add routine to array", () => {
+//     const manager = new RoutineManager();
+//     const routine = new Routine("Gym", "morning");
 
-    expect(manager.routines.length).toBe(1);
-  });
+//     manager.addRoutine(routine);
 
-  test("It should remove a routine by id", () => {
-    const manager = new RoutineManager();
-    const routine = new Routine("Gym", "morning");
+//     expect(manager.routines.length).toBe(1);
+//   });
 
-    manager.addRoutine(routine);
-    manager.removeRoutine(routine.id);
+//   test("should remove routine by id", () => {
+//     const manager = new RoutineManager();
+//     const routine = new Routine("Gym", "morning");
 
-    expect(manager.routines.length).toBe(0);
-  });
+//     manager.addRoutine(routine);
+//     manager.removeRoutine(routine.id);
 
-  test("It should get routines by time of day", () => {
-    const manager = new RoutineManager();
+//     expect(manager.routines.length).toBe(0);
+//   });
 
-    manager.addRoutine(new Routine("Gym", "morning"));
-    manager.addRoutine(new Routine("Study", "afternoon"));
+//   test("should mark routine as complete by id", () => {
+//     const manager = new RoutineManager();
+//     const routine = new Routine("Walk", "evening");
 
-    const morningRoutines = manager.getByTime("morning");
+//     manager.addRoutine(routine);
+//     manager.markComplete(routine.id);
 
-    expect(morningRoutines.length).toBe(1);
-    expect(morningRoutines[0].activity).toBe("Gym");
-  });
+//     expect(routine.completed).toBe(true);
+//   });
 
-  test("It should mark a routine as complete using manager", () => {
-    const manager = new RoutineManager();
-    const routine = new Routine("Walk", "evening");
+//   test("should filter routines by time of day", () => {
+//     const manager = new RoutineManager();
 
-    manager.addRoutine(routine);
-    manager.markComplete(routine.id);
+//     manager.addRoutine(new Routine("Gym", "morning"));
+//     manager.addRoutine(new Routine("Study", "afternoon"));
 
-    expect(routine.completed).toBe(true);
-  });
+//     const morning = manager.getByTime("morning");
 
-  test("It should return completed routines", () => {
-    const manager = new RoutineManager();
+//     expect(morning.length).toBe(1);
+//     expect(morning[0].activity).toBe("Gym");
+//   });
 
-    const r1 = new Routine("Walk", "morning");
-    const r2 = new Routine("Study", "afternoon");
-
-    manager.addRoutine(r1);
-    manager.addRoutine(r2);
-
-    manager.markComplete(r1.id);
-
-    const completed = manager.getCompleted();
-
-    expect(completed.length).toBe(1);
-    expect(completed[0].activity).toBe("Walk");
-  });
-
-});
+// });

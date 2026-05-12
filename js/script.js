@@ -70,4 +70,22 @@ function render() {
       eveningList.appendChild(li);
     }
   });
+  
+  if (routine.completed) {
+  const li = document.createElement("li");
+  li.textContent = routine.activity + " (Done)";
+
+  // DELETE BUTTON FOR COMPLETED TASKS
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+
+  deleteBtn.addEventListener("click", () => {
+    manager.removeRoutine(routine.id);
+    render();
+  });
+
+  li.appendChild(deleteBtn);
+  completedList.appendChild(li);
+  return;
+}
 }
