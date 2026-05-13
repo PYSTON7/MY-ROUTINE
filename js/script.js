@@ -174,6 +174,9 @@ address.textContent = `Address: ${contact.address}`;
       li.appendChild(deleteBtn);
 
       contactList.appendChild(li);
+      li.appendChild(phone);
+      li.appendChild(address);
+      li.appendChild()
     });
   }
 
