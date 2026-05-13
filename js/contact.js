@@ -3,11 +3,9 @@ function Contact(firstName, lastName, phone, address) {
   this.lastName = lastName;
   this.phone = phone;
   this.address = address;
-  this.id = Date.now();
+  this.id = crypto.randomUUID();
 }
 
 Contact.prototype.fullName = function () {
   return `${this.firstName} ${this.lastName}`;
 };
-
-module.exports = { Contact };

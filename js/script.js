@@ -148,8 +148,21 @@ function renderContacts() {
 
     // SHOW DETAILS
     li.addEventListener("click", () => {
-      showContactDetails(contact.id);
-    });
+  showContactDetails(contact.id);
+});
+    function showContactDetails(id) {
+
+  const contact = addressBook.findContact(id);
+
+  if (!contact) return;
+
+  contactDetails.innerHTML = `
+    <h3>Contact Details</h3>
+    <p><strong>Name:</strong> ${contact.fullName()}</p>
+    <p><strong>Phone:</strong> ${contact.phone}</p>
+    <p><strong>Address:</strong> ${contact.address}</p>
+  `;
+}
 
     // DELETE BUTTON
     const deleteBtn = document.createElement("button");
@@ -173,13 +186,15 @@ function renderContacts() {
 
 // SHOW CONTACT DETAILS
 function showContactDetails(id) {
+
   const contact = addressBook.findContact(id);
 
   if (!contact) return;
 
   contactDetails.innerHTML = `
-    <p><strong>Name:</strong> ${contact.fullName()}</p>
-    <p><strong>Phone:</strong> ${contact.phone}</p>
-    <p><strong>Address:</strong> ${contact.address}</p>
+    <h3>Contact Details</h3>
+    <p>Name: ${contact.fullName()}</p>
+    <p>Phone: ${contact.phone}</p>
+    <p>Address: ${contact.address}</p>
   `;
 }
