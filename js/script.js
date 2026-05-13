@@ -1,167 +1,177 @@
-// ROUTINE PLANNER 
+// INIT AFTER DOM LOAD
 
-const manager = new RoutineManager();
 
-const form = document.getElementById("routine-form");
-const activityInput = document.getElementById("activity");
-const timeInput = document.getElementById("time-of-day");
+document.addEventListener("DOMContentLoaded", function () {
 
-const morningList = document.getElementById("morning-list");
-const afternoonList = document.getElementById("afternoon-list");
-const eveningList = document.getElementById("evening-list");
-const completedList = document.getElementById("completed-list");
+  
+  // ROUTINE PLANNER
 
-// ADD ROUTINE
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
 
-  const activity = activityInput.value.trim();
-  const timeOfDay = timeInput.value;
+  const manager = new RoutineManager();
 
-  if (!activity) return;
+  const form = document.getElementById("routine-form");
+  const activityInput = document.getElementById("activity");
+  const timeInput = document.getElementById("time-of-day");
 
-  const routine = new Routine(activity, timeOfDay);
+  const morningList = document.getElementById("morning-list");
+  const afternoonList = document.getElementById("afternoon-list");
+  const eveningList = document.getElementById("evening-list");
+  const completedList = document.getElementById("completed-list");
 
-  manager.addRoutine(routine);
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-  form.reset();
+    const activity = activityInput.value.trim();
+    const timeOfDay = timeInput.value;
 
-  renderRoutines();
-});
+    if (!activity) return;
 
-// RENDER ROUTINES
-function renderRoutines() {
-  morningList.innerHTML = "";
-  afternoonList.innerHTML = "";
-  eveningList.innerHTML = "";
-  completedList.innerHTML = "";
+    const routine = new Routine(activity, timeOfDay);
 
-  manager.routines.forEach(routine => {
+    manager.addRoutine(routine);
 
-    // COMPLETED TASKS
-    if (routine.completed) {
+    form.reset();
+
+    renderRoutines();
+  });
+
+  function renderRoutines() {
+    morningList.innerHTML = "";
+    afternoonList.innerHTML = "";
+    eveningList.innerHTML = "";
+    completedList.innerHTML = "";
+
+    manager.routines.forEach(routine => {
+
+      // COMPLETED
+      if (routine.completed) {
+        const li = document.createElement("li");
+        li.textContent = routine.activity + " (Done)";
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+
+        deleteBtn.onclick = () => {
+          manager.removeRoutine(routine.id);
+          renderRoutines();
+        };
+
+        li.appendChild(deleteBtn);
+        completedList.appendChild(li);
+        return;
+      }
+
+      // ACTIVE TASK
       const li = document.createElement("li");
-      li.textContent = routine.activity + " (Done)";
+      li.textContent = routine.activity;
 
-      // DELETE BUTTON FOR COMPLETED TASKS
+      const doneBtn = document.createElement("button");
+      doneBtn.textContent = "Done";
+
+      doneBtn.onclick = () => {
+        manager.markComplete(routine.id);
+        renderRoutines();
+      };
+
       const deleteBtn = document.createElement("button");
       deleteBtn.textContent = "Delete";
 
-      deleteBtn.addEventListener("click", () => {
+      deleteBtn.onclick = () => {
         manager.removeRoutine(routine.id);
         renderRoutines();
-      });
+      };
 
+      li.appendChild(doneBtn);
       li.appendChild(deleteBtn);
-      completedList.appendChild(li);
 
-      return;
-    }
-
-    // NORMAL TASKS
-    const li = document.createElement("li");
-    li.textContent = routine.activity;
-
-    // DONE BUTTON
-    const doneBtn = document.createElement("button");
-    doneBtn.textContent = "Done";
-
-    doneBtn.addEventListener("click", () => {
-      manager.markComplete(routine.id);
-      renderRoutines();
+      if (routine.timeOfDay === "morning") {
+        morningList.appendChild(li);
+      } else if (routine.timeOfDay === "afternoon") {
+        afternoonList.appendChild(li);
+      } else {
+        eveningList.appendChild(li);
+      }
     });
+  }
 
-    // DELETE BUTTON
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
 
-    deleteBtn.addEventListener("click", () => {
-      manager.removeRoutine(routine.id);
-      renderRoutines();
-    });
+ 
+  // ADDRESS BOOK
 
-    li.appendChild(doneBtn);
-    li.appendChild(deleteBtn);
 
-    // ADD TO CORRECT SECTION
-    if (routine.timeOfDay === "morning") {
-      morningList.appendChild(li);
-    } else if (routine.timeOfDay === "afternoon") {
-      afternoonList.appendChild(li);
-    } else {
-      eveningList.appendChild(li);
-    }
+  const addressBook = new AddressBook();
 
+  const contactForm = document.getElementById("contact-form");
+
+  const firstNameInput = document.getElementById("first-name");
+  const lastNameInput = document.getElementById("last-name");
+  const phoneInput = document.getElementById("phone");
+  const addressInput = document.getElementById("address");
+
+  const contactList = document.getElementById("contact-list");
+  const contactDetails = document.getElementById("contact-details");
+
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const firstName = firstNameInput.value.trim();
+    const lastName = lastNameInput.value.trim();
+    const phone = phoneInput.value.trim();
+    const address = addressInput.value.trim();
+
+    if (!firstName || !lastName) return;
+
+    const contact = new Contact(firstName, lastName, phone, address);
+
+    addressBook.addContact(contact);
+
+    contactForm.reset();
+
+    renderContacts();
   });
-}
 
-
-// ADDRESS BOOK LOGIC
-
-const addressBook = new AddressBook();
-
-const contactForm = document.getElementById("contact-form");
-
-const firstNameInput = document.getElementById("first-name");
-const lastNameInput = document.getElementById("last-name");
-const phoneInput = document.getElementById("phone");
-const addressInput = document.getElementById("address");
-
-const contactList = document.getElementById("contact-list");
-const contactDetails = document.getElementById("contact-details");
-
-// ADD CONTACT
-contactForm.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const firstName = firstNameInput.value.trim();
-  const lastName = lastNameInput.value.trim();
-  const phone = phoneInput.value.trim();
-  const address = addressInput.value.trim();
-
-  const contact = new Contact(
-    firstName,
-    lastName,
-    phone,
-    address
-  );
-
-  addressBook.addContact(contact);
-
-  contactForm.reset();
-
-  renderContacts();
-});
-
-// RENDER CONTACTS
-function renderContacts() {
-
+ function renderContacts() {
   contactList.innerHTML = "";
 
   addressBook.contacts.forEach(contact => {
 
     const li = document.createElement("li");
+    li.style.padding = "8px";
+    li.style.borderBottom = "1px solid #ddd";
 
-    li.textContent = contact.fullName();
+    // NAME (CLICKABLE)
+    const name = document.createElement("span");
+    name.textContent = contact.fullName();
+    name.style.cursor = "pointer";
+    name.style.fontWeight = "bold";
+    name.style.display = "block";
 
-    // CLICK CONTACT
-    li.addEventListener("click", function () {
-
+    name.onclick = function () {
       contactDetails.innerHTML = `
         <h3>Contact Details</h3>
         <p><strong>Name:</strong> ${contact.fullName()}</p>
         <p><strong>Phone:</strong> ${contact.phone}</p>
         <p><strong>Address:</strong> ${contact.address}</p>
       `;
-    });
+    };
+
+    // PHONE + ADDRESS UNDER NAME
+    const info = document.createElement("div");
+    info.style.fontSize = "0.9em";
+    info.style.color = "#555";
+    info.style.marginTop = "4px";
+
+    info.innerHTML = `
+      <div>📞 ${contact.phone}</div>
+      <div>🏠 ${contact.address}</div>
+    `;
 
     // DELETE BUTTON
     const deleteBtn = document.createElement("button");
-
     deleteBtn.textContent = "Delete";
+    deleteBtn.style.marginTop = "5px";
 
-    deleteBtn.addEventListener("click", function (e) {
-
+    deleteBtn.onclick = function (e) {
       e.stopPropagation();
 
       addressBook.deleteContact(contact.id);
@@ -169,8 +179,10 @@ function renderContacts() {
       renderContacts();
 
       contactDetails.innerHTML = "";
-    });
+    };
 
+    li.appendChild(name);
+    li.appendChild(info);
     li.appendChild(deleteBtn);
 
     contactList.appendChild(li);
