@@ -141,6 +141,13 @@ document.addEventListener("DOMContentLoaded", function () {
       name.textContent = contact.fullName();
       name.style.cursor = "pointer";
 
+      const phone = document.createElement("p");
+phone.textContent = `Phone: ${contact.phone}`;
+
+const address = document.createElement("p");
+address.textContent = `Address: ${contact.address}`;
+
+
       name.onclick = function () {
         contactDetails.innerHTML = `
           <h3>Contact Details</h3>
