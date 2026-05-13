@@ -1,9 +1,8 @@
-# MY ROUTINE PLANNER
-Routine Planner is a web application that helps users organize morning, afternoon, and evening activities using JavaScript constructors and prototypes.
-# AUTHOR 
-Pyston Patrick
+## MY ROUTINE PLANNER
 # Description
-My Routine Planner is a simple JavaScript application that helps users organize their daily activities into morning, afternoon, and evening routines. Users can add activities, mark them as complete, and delete them when no longer needed.
+My Routine Planner, Address Book & Places You've Been is a JavaScript-based web application that helps users organize their daily life. It allows users to add and manage daily routines, store contact information, and track places they have visited. The project uses constructors, prototypes, and object-oriented JavaScript to manage data, while keeping business logic separate from the user interface. Users can add, view, and delete items, as well as view detailed information through an interactive UI.
+# Author
+Pyston Patrick
 # Features
 - Add activities with time of day (morning, afternoon, evening)
 - Store activities as JavaScript objects
