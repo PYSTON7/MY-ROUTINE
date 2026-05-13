@@ -1,3 +1,5 @@
+// ROUTINE PLANNER 
+
 const manager = new RoutineManager();
 
 const form = document.getElementById("routine-form");
@@ -9,11 +11,14 @@ const afternoonList = document.getElementById("afternoon-list");
 const eveningList = document.getElementById("evening-list");
 const completedList = document.getElementById("completed-list");
 
+// ADD ROUTINE
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
   const activity = activityInput.value.trim();
   const timeOfDay = timeInput.value;
+
+  if (!activity) return;
 
   const routine = new Routine(activity, timeOfDay);
 
@@ -21,10 +26,11 @@ form.addEventListener("submit", function (e) {
 
   form.reset();
 
-  render();
+  renderRoutines();
 });
 
-function render() {
+// RENDER ROUTINES
+function renderRoutines() {
   morningList.innerHTML = "";
   afternoonList.innerHTML = "";
   eveningList.innerHTML = "";
@@ -32,36 +38,52 @@ function render() {
 
   manager.routines.forEach(routine => {
 
-    // COMPLETED
+    // COMPLETED TASKS
     if (routine.completed) {
       const li = document.createElement("li");
       li.textContent = routine.activity + " (Done)";
+
+      // DELETE BUTTON FOR COMPLETED TASKS
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+
+      deleteBtn.addEventListener("click", () => {
+        manager.removeRoutine(routine.id);
+        renderRoutines();
+      });
+
+      li.appendChild(deleteBtn);
       completedList.appendChild(li);
+
       return;
     }
 
+    // NORMAL TASKS
     const li = document.createElement("li");
     li.textContent = routine.activity;
 
     // DONE BUTTON
     const doneBtn = document.createElement("button");
     doneBtn.textContent = "Done";
+
     doneBtn.addEventListener("click", () => {
       manager.markComplete(routine.id);
-      render();
+      renderRoutines();
     });
 
     // DELETE BUTTON
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
+
     deleteBtn.addEventListener("click", () => {
       manager.removeRoutine(routine.id);
-      render();
+      renderRoutines();
     });
 
     li.appendChild(doneBtn);
     li.appendChild(deleteBtn);
 
+    // ADD TO CORRECT SECTION
     if (routine.timeOfDay === "morning") {
       morningList.appendChild(li);
     } else if (routine.timeOfDay === "afternoon") {
@@ -69,23 +91,95 @@ function render() {
     } else {
       eveningList.appendChild(li);
     }
+
   });
-  
-  if (routine.completed) {
-  const li = document.createElement("li");
-  li.textContent = routine.activity + " (Done)";
-
-  // DELETE BUTTON FOR COMPLETED TASKS
-  const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "Delete";
-
-  deleteBtn.addEventListener("click", () => {
-    manager.removeRoutine(routine.id);
-    render();
-  });
-
-  li.appendChild(deleteBtn);
-  completedList.appendChild(li);
-  return;
 }
+
+
+// ADDRESS BOOK LOGIC
+
+
+const addressBook = new AddressBook();
+
+const contactForm = document.getElementById("contact-form");
+
+const firstNameInput = document.getElementById("first-name");
+const lastNameInput = document.getElementById("last-name");
+const phoneInput = document.getElementById("phone");
+const addressInput = document.getElementById("address");
+
+const contactList = document.getElementById("contact-list");
+const contactDetails = document.getElementById("contact-details");
+
+// ADD CONTACT
+contactForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const firstName = firstNameInput.value.trim();
+  const lastName = lastNameInput.value.trim();
+  const phone = phoneInput.value.trim();
+  const address = addressInput.value.trim();
+
+  if (!firstName || !lastName) return;
+
+  const contact = new Contact(
+    firstName,
+    lastName,
+    phone,
+    address
+  );
+
+  addressBook.addContact(contact);
+
+  contactForm.reset();
+
+  renderContacts();
+});
+
+// RENDER CONTACTS
+function renderContacts() {
+  contactList.innerHTML = "";
+
+  addressBook.contacts.forEach(contact => {
+
+    const li = document.createElement("li");
+
+    li.textContent = contact.fullName();
+
+    // SHOW DETAILS
+    li.addEventListener("click", () => {
+      showContactDetails(contact.id);
+    });
+
+    // DELETE BUTTON
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+
+    deleteBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+
+      addressBook.deleteContact(contact.id);
+
+      renderContacts();
+
+      contactDetails.innerHTML = "";
+    });
+
+    li.appendChild(deleteBtn);
+
+    contactList.appendChild(li);
+  });
+}
+
+// SHOW CONTACT DETAILS
+function showContactDetails(id) {
+  const contact = addressBook.findContact(id);
+
+  if (!contact) return;
+
+  contactDetails.innerHTML = `
+    <p><strong>Name:</strong> ${contact.fullName()}</p>
+    <p><strong>Phone:</strong> ${contact.phone}</p>
+    <p><strong>Address:</strong> ${contact.address}</p>
+  `;
 }
