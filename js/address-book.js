@@ -1,14 +1,11 @@
 function AddressBook() {
-  this.contacts = [];
+    this.contacts = [];
 }
 
 AddressBook.prototype.addContact = function(contact) {
-  this.contacts.push(contact);
+    this.contacts.push(contact);
 };
 
 AddressBook.prototype.deleteContact = function(id) {
-
-  this.contacts = this.contacts.filter(
-    contact => contact.id !== id
-  );
+    this.contacts = this.contacts.filter(contact => contact.id !== id);
 };
