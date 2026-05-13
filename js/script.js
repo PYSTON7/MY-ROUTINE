@@ -178,3 +178,107 @@ address.textContent = `Address: ${contact.address}`;
   }
 
 });
+// PLACES YOU'VE BEEN
+document.addEventListener("DOMContentLoaded", function () {
+
+  // Constructor
+  function Place(name, location, landmarks, timeOfYear, notes) {
+    this.name = name;
+    this.location = location;
+    this.landmarks = landmarks; // string, comma-separated
+    this.timeOfYear = timeOfYear;
+    this.notes = notes;
+    this.id = crypto.randomUUID(); // unique identifier
+  }
+
+  // full info of the place
+  Place.prototype.fullInfo = function () {
+    return `${this.name} - ${this.location} (${this.timeOfYear})`;
+  };
+
+  // Manager to store all places
+  function PlaceManager() {
+    this.places = [];
+  }
+
+  // Add a place
+  PlaceManager.prototype.addPlace = function (place) {
+    this.places.push(place);
+  };
+
+  // Delete a place
+  PlaceManager.prototype.deletePlace = function (id) {
+    this.places = this.places.filter(place => place.id !== id);
+  };
+
+  // Manager
+  const manager = new PlaceManager();
+
+  // DOM elements
+  const placeForm = document.getElementById("place-form");
+  const nameInput = document.getElementById("place-name");
+  const locationInput = document.getElementById("place-location");
+  const landmarksInput = document.getElementById("place-landmarks");
+  const timeInput = document.getElementById("place-time");
+  const notesInput = document.getElementById("place-notes");
+
+  const placeList = document.getElementById("place-list");
+  const placeDetails = document.getElementById("place-details");
+
+  // Add Place Event
+  placeForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const name = nameInput.value.trim();
+    const location = locationInput.value.trim();
+    const landmarks = landmarksInput.value.trim();
+    const timeOfYear = timeInput.value.trim();
+    const notes = notesInput.value.trim();
+
+    if (!name || !location) return; // required fields
+
+    const place = new Place(name, location, landmarks, timeOfYear, notes);
+    manager.addPlace(place);
+
+    placeForm.reset();
+    renderPlaces();
+  });
+
+  // Render Places
+  function renderPlaces() {
+    placeList.innerHTML = "";
+    placeDetails.innerHTML = "";
+
+    manager.places.forEach(place => {
+      const li = document.createElement("li");
+
+      // Place Name clickable
+      const nameSpan = document.createElement("span");
+      nameSpan.textContent = place.name;
+      nameSpan.style.cursor = "pointer";
+      nameSpan.onclick = function () {
+        placeDetails.innerHTML = `
+          <h3>${place.name}</h3>
+          <p><strong>Location:</strong> ${place.location}</p>
+          <p><strong>Landmarks:</strong> ${place.landmarks || "None"}</p>
+          <p><strong>Time of Year:</strong> ${place.timeOfYear || "N/A"}</p>
+          <p><strong>Notes:</strong> ${place.notes || "None"}</p>
+        `;
+      };
+
+      // Delete Button
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.onclick = function () {
+        manager.deletePlace(place.id);
+        renderPlaces();
+      };
+
+      li.appendChild(nameSpan);
+      li.appendChild(deleteBtn);
+
+      placeList.appendChild(li);
+    });
+  }
+
+});

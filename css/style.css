@@ -1,15 +1,15 @@
 body {
   font-family: Arial;
-  background: #f4f4f4;
+  background: #ff0000;
 }
-
+h1 {font-weight: bolder;}
 .container {
   width: 80%;
   margin: auto;
 }
 
 form {
-  background: white;
+  background: rgb(45, 140, 113);
   padding: 10px;
   margin-bottom: 20px;
 }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Routine Planner & Address Book</title>
+  <title>Routine Planner,Address Book & Visited Places</title>
 
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -11,9 +11,7 @@
 <body>
 
   <div class="container">
-
-    <h1>My Routine Planner</h1>
-
+    <h1>ROUTINE PLANNER</h1>
     <!-- ROUTINE FORM -->
     <form id="routine-form">
 
@@ -65,7 +63,7 @@
     <!-- ADDRESS BOOK SECTION -->
     <div class="address-book-section">
 
-      <h1>Address Book</h1>
+      <h1>ADDRESS BOOK</h1>
 
       <form id="contact-form">
 
@@ -105,7 +103,53 @@
        <div id="contact-details"><p>Click the name to show Contact Details</p></div>
   </div>
 
+    
+    <!-- PLACES YOU'VE BEEN -->
+<div class="places-container">
+  <h1>PLACES YOU'VE BEEN</h1>
+
+  <!-- Add New Place Form -->
+  <form id="place-form">
+    <div class="form-group">
+      <label for="place-name">Place Name</label>
+      <input type="text" id="place-name" required>
     </div>
+
+    <div class="form-group">
+      <label for="place-location">Location</label>
+      <input type="text" id="place-location" required>
+    </div>
+
+    <div class="form-group">
+      <label for="place-landmarks">Landmarks</label>
+      <input type="text" id="place-landmarks" placeholder="Separate with commas">
+    </div>
+
+    <div class="form-group">
+      <label for="place-time">Time of Year</label>
+      <input type="text" id="place-time" placeholder="e.g., Summer 2023">
+    </div>
+
+    <div class="form-group">
+      <label for="place-notes">Notes</label>
+      <textarea id="place-notes" rows="3" placeholder="Your experience"></textarea>
+    </div>
+
+    <button type="submit">Add Place</button>
+  </form>
+
+  <!-- List of Places -->
+  <div class="places-list-container">
+    <h2>Visited Places</h2>
+    <ul id="place-list"></ul>
+  </div>
+
+  <!-- Place Details -->
+  <div class="place-details-container">
+    <h2>Place Details</h2>
+    <div id="place-details"></div>
+  </div>
+</div>
 
   </div>
 
