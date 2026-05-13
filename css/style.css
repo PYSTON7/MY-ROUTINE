@@ -1,34 +1,137 @@
-body {
-  font-family: Arial;
-  background: #ff0000;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
-h1 {font-weight: bolder;}
+
+body {
+  background: #f4f6f9;
+  padding: 20px;
+}
+
 .container {
-  width: 80%;
+  max-width: 1000px;
   margin: auto;
 }
 
-form {
-  background: rgb(45, 140, 113);
-  padding: 10px;
-  margin-bottom: 20px;
+/* HEADINGS */
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  color: #333;
 }
 
+h2 {
+  margin-bottom: 10px;
+  color: #444;
+}
+
+/* FORM STYLING */
+form {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
 .routine-sections {
   display: flex;
-  gap: 10px;
+  gap: 15px;
+  justify-content: space-between;
+  flex-wrap: wrap; 
 }
 
 .routine-box {
-  background: white;
-  padding: 10px;
   flex: 1;
+  min-width: 250px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* BUTTONS */
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+/* SECTIONS LAYOUT */
+.routine-sections,
+.address-book-section,
+.places-container {
+  margin-top: 30px;
+}
+
+/* BOX LAYOUT */
+.routine-box,
+.contact-box,
+.contact-details-box,
+.places-list-container,
+.place-details-container {
+  background: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* LISTS */
+ul {
+  list-style: none;
 }
 
 li {
-  margin: 5px 0;
+  background: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-button {
-  margin-left: 5px;
+/* CONTACT NAME CLICK */
+span {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* BUTTON ALIGNMENT INSIDE LIST ITEMS */
+li button {
+  width: fit-content;
+  background: crimson;
+}
+
+li button:hover {
+  background: darkred;
+}
+
+/* COMPLETED TASKS */
+.completed-section li {
+  text-decoration: line-through;
+  opacity: 0.7;
 }
