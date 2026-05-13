@@ -62,4 +62,5 @@ It should update the UI after every change
 # Lisence 
 MIT Lisence
 # Copyright
+© 2026 My-Routine. All rights reserved.
 
