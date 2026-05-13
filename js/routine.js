@@ -13,4 +13,3 @@ Routine.prototype.getInfo = function () {
   return `${this.activity} (${this.timeOfDay})`;
 };
 
-module.exports = { Routine };

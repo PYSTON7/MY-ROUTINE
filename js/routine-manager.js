@@ -19,4 +19,3 @@ RoutineManager.prototype.getByTime = function (timeOfDay) {
   return this.routines.filter(r => r.timeOfDay === timeOfDay);
 };
 
-module.exports = { RoutineManager };
