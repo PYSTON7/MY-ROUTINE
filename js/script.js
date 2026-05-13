@@ -98,7 +98,6 @@ function renderRoutines() {
 
 // ADDRESS BOOK LOGIC
 
-
 const addressBook = new AddressBook();
 
 const contactForm = document.getElementById("contact-form");
@@ -120,8 +119,6 @@ contactForm.addEventListener("submit", function (e) {
   const phone = phoneInput.value.trim();
   const address = addressInput.value.trim();
 
-  if (!firstName || !lastName) return;
-
   const contact = new Contact(
     firstName,
     lastName,
@@ -138,6 +135,7 @@ contactForm.addEventListener("submit", function (e) {
 
 // RENDER CONTACTS
 function renderContacts() {
+
   contactList.innerHTML = "";
 
   addressBook.contacts.forEach(contact => {
@@ -146,29 +144,24 @@ function renderContacts() {
 
     li.textContent = contact.fullName();
 
-    // SHOW DETAILS
-    li.addEventListener("click", () => {
-  showContactDetails(contact.id);
-});
-    function showContactDetails(id) {
+    // CLICK CONTACT
+    li.addEventListener("click", function () {
 
-  const contact = addressBook.findContact(id);
-
-  if (!contact) return;
-
-  contactDetails.innerHTML = `
-    <h3>Contact Details</h3>
-    <p><strong>Name:</strong> ${contact.fullName()}</p>
-    <p><strong>Phone:</strong> ${contact.phone}</p>
-    <p><strong>Address:</strong> ${contact.address}</p>
-  `;
-}
+      contactDetails.innerHTML = `
+        <h3>Contact Details</h3>
+        <p><strong>Name:</strong> ${contact.fullName()}</p>
+        <p><strong>Phone:</strong> ${contact.phone}</p>
+        <p><strong>Address:</strong> ${contact.address}</p>
+      `;
+    });
 
     // DELETE BUTTON
     const deleteBtn = document.createElement("button");
+
     deleteBtn.textContent = "Delete";
 
-    deleteBtn.addEventListener("click", (e) => {
+    deleteBtn.addEventListener("click", function (e) {
+
       e.stopPropagation();
 
       addressBook.deleteContact(contact.id);
@@ -182,19 +175,4 @@ function renderContacts() {
 
     contactList.appendChild(li);
   });
-}
-
-// SHOW CONTACT DETAILS
-function showContactDetails(id) {
-
-  const contact = addressBook.findContact(id);
-
-  if (!contact) return;
-
-  contactDetails.innerHTML = `
-    <h3>Contact Details</h3>
-    <p>Name: ${contact.fullName()}</p>
-    <p>Phone: ${contact.phone}</p>
-    <p>Address: ${contact.address}</p>
-  `;
 }
