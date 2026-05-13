@@ -32,6 +32,7 @@ A prototype is a shared object that allows all instances created from a construc
 1. Clone the repository:
 bash
 git clone https://github.com/PYSTON7/MY-ROUTINE.git
+2. To view the project: https://pyston7.github.io/MY-ROUTINE/
 
 ## TEST DRIVEN DEVELOPMENT (PSEUDO-CODED TESTS)
 # Routine Constructor
