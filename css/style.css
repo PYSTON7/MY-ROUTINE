@@ -2,136 +2,190 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
 body {
-  background: #f4f6f9;
+  background: var(--bg);
+  color: var(--text);
   padding: 20px;
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: auto;
 }
 
-/* HEADINGS */
+/* TITLE */
 h1 {
   text-align: center;
-  margin: 20px 0;
-  color: #333;
+  margin-bottom: 25px;
+  color: var(--primary);
+  letter-spacing: 1px;
 }
 
+/* SECTION HEADERS */
 h2 {
   margin-bottom: 10px;
-  color: #444;
+  font-size: 1rem;
+  color: var(--muted);
+  text-transform: uppercase;
 }
 
-/* FORM STYLING */
-form {
-  background: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.form-group {
-  margin-bottom: 10px;
-}
-.routine-sections {
-  display: flex;
-  gap: 15px;
-  justify-content: space-between;
-  flex-wrap: wrap; 
-}
-
-.routine-box {
-  flex: 1;
-  min-width: 250px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-input, select, textarea {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-/* BUTTONS */
-button {
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-top: 5px;
-}
-
-button:hover {
-  background: #0056b3;
-}
-
-/* SECTIONS LAYOUT */
-.routine-sections,
-.address-book-section,
-.places-container {
-  margin-top: 30px;
-}
-
-/* BOX LAYOUT */
+/* CARD SECTIONS */
+form,
 .routine-box,
+.completed-section,
 .contact-box,
 .contact-details-box,
 .places-list-container,
 .place-details-container {
-  background: white;
+  background: var(--card);
   padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
 }
 
-/* LISTS */
+/* FORMS */
+form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  align-items: end;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 0.85rem;
+  margin-bottom: 5px;
+  color: var(--muted);
+}
+
+input, select, textarea {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* BUTTONS */
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: 600;
+}
+
+button:hover {
+  background: #357abd;
+}
+
+/* ROUTINE LAYOUT (SIDE BY SIDE) */
+.routine-sections {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* RESPONSIVE ROUTINES */
+@media (max-width: 900px) {
+  .routine-sections {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* LIST ITEMS */
 ul {
   list-style: none;
 }
 
 li {
-  background: #f9f9f9;
+  background: #f9fafc;
   padding: 10px;
-  margin-bottom: 8px;
-  border-radius: 6px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border-left: 4px solid var(--primary);
+
   display: flex;
-  flex-direction: column;
-  gap: 5px;
+  justify-content: space-between;
+  align-items: center;
+
+  transition: 0.2s;
 }
 
-/* CONTACT NAME CLICK */
+li:hover {
+  transform: translateX(4px);
+  background: #eef4ff;
+}
+
+/* CLICKABLE CONTACT/PLACE NAME */
 span {
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
 }
 
-/* BUTTON ALIGNMENT INSIDE LIST ITEMS */
+/* DELETE BUTTON */
 li button {
-  width: fit-content;
-  background: crimson;
+  background: var(--danger);
+  padding: 6px 10px;
+  font-size: 0.8rem;
 }
 
 li button:hover {
-  background: darkred;
+  background: #c0392b;
 }
 
 /* COMPLETED TASKS */
 .completed-section li {
   text-decoration: line-through;
-  opacity: 0.7;
+  opacity: 0.6;
+  border-left: 4px solid var(--secondary);
+}
+
+/* DETAILS BOXES */
+.contact-details-box,
+.place-details-container {
+  background: #f8fbff;
+  border: 1px dashed var(--primary);
+}
+
+/* PLACES FORM LAYOUT */
+.places-container form {
+  grid-template-columns: 1fr 1fr;
+}
+
+.places-container .form-group:last-child {
+  grid-column: span 2;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .places-container form {
+    grid-template-columns: 1fr;
+  }
+
+  .places-container .form-group:last-child {
+    grid-column: span 1;
+  }
+}
+
+:root {
+  --primary: #000000e6;
+  --secondary: #0051ff;
+  --danger: #e74c3c;
+  --bg: #53fa0021;
+  --card: #ffffff3f;
+  --text: #000000;
+  --muted: #000000;
+  --radius: 12px;
+  --shadow: 0 6px 18px rgba(255, 0, 0, 0.08);
 }
