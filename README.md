@@ -58,3 +58,8 @@ It should display routines in the correct section
 It should move completed routines to a completed list
 It should delete routines when the delete button is clicked
 It should update the UI after every change
+
+# Lisence 
+MIT Lisence
+# Copyright
+
