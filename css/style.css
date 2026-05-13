@@ -179,13 +179,13 @@ li button:hover {
 }
 
 :root {
-  --primary: #000000e6;
-  --secondary: #0051ff;
+  --primary: #0852f4e6;
+  --secondary: #000000;
   --danger: #e74c3c;
-  --bg: #53fa0021;
-  --card: #ffffff3f;
+  --bg: #8ed7a734;
+  --card: #ffffff74;
   --text: #000000;
   --muted: #000000;
   --radius: 12px;
-  --shadow: 0 6px 18px rgba(255, 0, 0, 0.08);
+  --shadow: 0 4px 10px rgb(0, 0, 0);
 }
