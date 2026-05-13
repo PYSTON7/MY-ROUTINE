@@ -130,61 +130,44 @@ document.addEventListener("DOMContentLoaded", function () {
     renderContacts();
   });
 
- function renderContacts() {
-  contactList.innerHTML = "";
+  function renderContacts() {
+    contactList.innerHTML = "";
 
-  addressBook.contacts.forEach(contact => {
+    addressBook.contacts.forEach(contact => {
 
-    const li = document.createElement("li");
-    li.style.padding = "8px";
-    li.style.borderBottom = "1px solid #ddd";
+      const li = document.createElement("li");
 
-    // NAME (CLICKABLE)
-    const name = document.createElement("span");
-    name.textContent = contact.fullName();
-    name.style.cursor = "pointer";
-    name.style.fontWeight = "bold";
-    name.style.display = "block";
+      const name = document.createElement("span");
+      name.textContent = contact.fullName();
+      name.style.cursor = "pointer";
 
-    name.onclick = function () {
-      contactDetails.innerHTML = `
-        <h3>Contact Details</h3>
-        <p><strong>Name:</strong> ${contact.fullName()}</p>
-        <p><strong>Phone:</strong> ${contact.phone}</p>
-        <p><strong>Address:</strong> ${contact.address}</p>
-      `;
-    };
+      name.onclick = function () {
+        contactDetails.innerHTML = `
+          <h3>Contact Details</h3>
+          <p><strong>Name:</strong> ${contact.fullName()}</p>
+          <p><strong>Phone:</strong> ${contact.phone}</p>
+          <p><strong>Address:</strong> ${contact.address}</p>
+        `;
+      };
 
-    // PHONE + ADDRESS UNDER NAME
-    const info = document.createElement("div");
-    info.style.fontSize = "0.9em";
-    info.style.color = "#555";
-    info.style.marginTop = "4px";
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
 
-    info.innerHTML = `
-      <div>📞 ${contact.phone}</div>
-      <div>🏠 ${contact.address}</div>
-    `;
+      deleteBtn.onclick = function (e) {
+        e.stopPropagation();
 
-    // DELETE BUTTON
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    deleteBtn.style.marginTop = "5px";
+        addressBook.deleteContact(contact.id);
 
-    deleteBtn.onclick = function (e) {
-      e.stopPropagation();
+        renderContacts();
 
-      addressBook.deleteContact(contact.id);
+        contactDetails.innerHTML = "";
+      };
 
-      renderContacts();
+      li.appendChild(name);
+      li.appendChild(deleteBtn);
 
-      contactDetails.innerHTML = "";
-    };
+      contactList.appendChild(li);
+    });
+  }
 
-    li.appendChild(name);
-    li.appendChild(info);
-    li.appendChild(deleteBtn);
-
-    contactList.appendChild(li);
-  });
-}
+});
