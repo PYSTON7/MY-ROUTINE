@@ -31,12 +31,13 @@ AddRoutine Test:"It should add a routine to the routines array."
 FindRoutine Test:"It should return the routine with the matching id."
 Mark Completion Test:"It should mark a routine as completed using its id."
 Delete Routine Test:"It should remove the routine from the routines array."
-# UI (Basic Behavior)
-It should add a routine when the form is submitted
-It should display routines in the correct section
-It should move completed routines to a completed list
-It should delete routines when the delete button is clicked
-It should update the UI after every change
+# Adress Book
+Contact Test:"It should create a Contact object with a firstName, lastName, phoneNumber, and address."
+Contact Full Name Test:"It should return the contact's full name as a string."
+AddressBook Test:"It should create an Address Book with an empty contacts array."
+Add Contact Test:"It should add a contact to the contacts array."
+Find Contact Test:"It should return the contact with the matching id."
+Delete Contact Test:"It should remove the contact from the contacts array."
 
 # Lisence 
 MIT Lisence
