@@ -22,23 +22,15 @@ Pyston Patrick
 2. To view the project: https://pyston7.github.io/MY-ROUTINE/
 
 ## TEST DRIVEN DEVELOPMENT (PSEUDO-CODED TESTS)
-# Routine Constructor
-It should create a routine object with:
-activity (string)
-timeOfDay (string)
-completed (false by default)
-id (unique number)
-It should be able to mark a routine as complete:
-markComplete() sets completed to true
-# RoutineManager
-It should store all routines in an array
-It should add a routine to the array
-It should remove a routine using its id
-It should mark a routine as complete using its id
-It should return routines based on time of day:
-morning
-afternoon
-evening
+# Routine Planner:
+Routine test:"It should create a Routine object with an activity, timeOfDay, completed status, and id."
+Routine Information Test:"It should return the routine activity and timeOfDay as a formatted string."
+Routine Completeion Test:"It should set completed to true."
+Routine Manager Test:"It should create a RoutineManager with an empty routines array."
+AddRoutine Test:"It should add a routine to the routines array."
+FindRoutine Test:"It should return the routine with the matching id."
+Mark Completion Test:"It should mark a routine as completed using its id."
+Delete Routine Test:"It should remove the routine from the routines array."
 # UI (Basic Behavior)
 It should add a routine when the form is submitted
 It should display routines in the correct section
