@@ -31,13 +31,20 @@ AddRoutine Test:"It should add a routine to the routines array."
 FindRoutine Test:"It should return the routine with the matching id."
 Mark Completion Test:"It should mark a routine as completed using its id."
 Delete Routine Test:"It should remove the routine from the routines array."
-# Adress Book
+# Adress Book:
 Contact Test:"It should create a Contact object with a firstName, lastName, phoneNumber, and address."
 Contact Full Name Test:"It should return the contact's full name as a string."
 AddressBook Test:"It should create an Address Book with an empty contacts array."
 Add Contact Test:"It should add a contact to the contacts array."
 Find Contact Test:"It should return the contact with the matching id."
 Delete Contact Test:"It should remove the contact from the contacts array."
+# Places You've Been:
+Place Test:"It should create a Place object with a name, location, landmarks, timeOfYear, notes, and id."
+Full Info Test:"It should return the place name and location as a formatted string."
+Place Manager Test:"It should create a PlaceManager with an empty places array."
+Add Place Test:"It should add a place to the places array."
+Find Place Test:"It should return the place with the matching id."
+Delete Place Test:"It should remove the place from the places array."
 
 # Lisence 
 MIT Lisence
